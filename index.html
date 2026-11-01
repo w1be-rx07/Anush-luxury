@@ -154,12 +154,18 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
 .bl{display:grid;gap:12px;margin-top:16px}
 .bi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .bi small{display:block;color:var(--mute)}
+.wp{position:relative;width:240px;height:240px;margin:22px auto}
+.wl{position:relative;width:100%;height:100%;border-radius:50%;border:4px solid var(--acc);background:conic-gradient(#d4af6a 0 72deg,#9c6b78 72deg 144deg,#d4af6a 144deg 216deg,#9c6b78 216deg 288deg,#ecd08f 288deg 360deg);transition:transform 4.5s cubic-bezier(.12,.7,.1,1)}
+.wl b{position:absolute;left:calc(50% - 22px);top:calc(50% - 13px);width:44px;text-align:center;font-size:20px;color:#1a1608}
+.ptr{position:absolute;top:-14px;left:calc(50% - 11px);border:11px solid transparent;border-top:22px solid var(--ink)}
+.ab{display:flex;gap:8px}.ab button{font-size:26px;width:54px;height:54px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);cursor:pointer}
+#aw input,#apf input{font:inherit;padding:14px 16px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
 </style>
 </head>
 <body>
 <header><div class="wrap nav">
 <a class="logo" href="#top">Anush luxury</a>
-<nav><ul><li><a href="#usul">Usullar</a></li><li><a href="#nega">Biz haqimizda</a></li><li><a href="#narx">Narxlar</a></li><li><a href="#qoshimcha">Xizmatlar</a></li><li><a href="#savol">Savollar</a></li><li><a href="#aloqa">Aloqa</a></li></ul></nav>
+<nav><ul><li><a href="#usul">Usullar</a></li><li><a href="#nega">Biz haqimizda</a></li><li><a href="#narx">Narxlar</a></li><li><a href="#qoshimcha">Xizmatlar</a></li><li><a href="#savol">Savollar</a></li><li><a href="#aloqa">Aloqa</a></li><li id="ai"><a href="#" id="aa">🔑 Admin</a></li><li id="al" hidden><a href="#adm">👥 Mijozlar roʻyxati</a></li></ul></nav>
 <div class="tools"><button class="btn" id="acc" type="button" style="padding:10px 16px;font-size:14px">Kirish</button><button class="ib" id="th" aria-label="Rangni almashtirish">◐</button><button class="ib burger" id="bg" aria-label="Menyuni ochish" aria-expanded="false"><i></i><i></i><i></i></button></div>
 </div></header>
 
@@ -271,8 +277,20 @@ dialog::backdrop{background:rgba(0,0,0,.65)}
 <article class="card"><b class="big" id="kv">0</b><h3>Tashriflar</h3><p id="kp"></p><div class="bar"><i id="kb"></i></div></article>
 <article class="card"><h3>Chegirma</h3><p id="kc"></p></article>
 </div>
+<div id="wh" class="card" hidden style="margin-top:28px;text-align:center"><h3>🎂 Tugʻilgan kuningiz bilan!</h3><p>Barabanni aylantiring va chegirma yutib oling. Yilda bir marta, 7 kun amal qiladi.</p><div class="wp"><div class="wl" id="wl"></div><i class="ptr"></i></div><button class="btn" type="button" id="spn">Aylantirish</button><p id="wr" style="font-weight:600;margin-top:12px"></p></div>
 <h3 style="margin-top:36px">Yozilishlarim</h3><div id="bl" class="bl"></div>
 <button class="btn ghost" id="lo" type="button" style="margin-top:24px">Chiqish</button>
+</div></section>
+<section id="adm" hidden><div class="wrap">
+<h2>Mijozlar roʻyxati</h2>
+<div class="hs" style="justify-content:flex-start"><div><b id="as">0</b>qabul qilingan xizmatlar</div><div><b id="aq">0</b>navbatda</div></div>
+<h3 style="margin-top:30px">Navbat</h3><div id="aqu" class="bl"></div>
+<h3 style="margin-top:30px">Qoʻshish (saytdan yozilmay kelganlar)</h3>
+<form id="aw" class="af" style="max-width:520px"><input type="text" id="wn" placeholder="Ism (ixtiyoriy)"><input type="text" id="wx" required placeholder="Xizmat (masalan: oyoq, qoʻltiq)"><input type="number" id="wc" min="1" value="1" aria-label="Xizmatlar soni"><input type="number" id="ws" min="0" placeholder="Summa, soʻm (ixtiyoriy)"><button class="btn" type="submit">Navbatga qoʻshish</button></form>
+<h3 style="margin-top:30px">Oxirgilar</h3><div id="ahs" class="bl"></div>
+<h3 style="margin-top:30px">Admin parolini almashtirish</h3>
+<form id="apf" class="af" style="max-width:520px"><input type="password" id="np" required minlength="8" placeholder="Yangi parol (kamida 8 belgi)" autocomplete="new-password"><button class="btn" type="submit">Almashtirish</button><div class="ok" id="apo"></div></form>
+<button class="btn ghost" id="alo" type="button" style="margin-top:24px">Chiqish</button>
 </div></section>
 </main>
 <footer><div class="wrap">© 2026 Anush luxury depilyatsiya · <a href="https://t.me/anush_luxury" target="_blank" rel="noopener">Telegram</a> · <a href="https://instagram.com/anush__luxury" target="_blank" rel="noopener">Instagram</a></div></footer>
@@ -314,22 +332,24 @@ if('IntersectionObserver' in window){var io=new IntersectionObserver(function(a)
 <dialog id="ad">
 <div class="t2"><button type="button" id="t1" class="on">Kirish</button><button type="button" id="t2">Roʻyxatdan oʻtish</button><button type="button" id="cl" aria-label="Yopish">✕</button></div>
 <form id="fl" class="af"><label class="f">Telefon raqam<input type="tel" id="lp" required placeholder="+998 90 123 45 67" autocomplete="username"></label><label class="f">Parol<input type="password" id="lw" required autocomplete="current-password"></label><button class="btn" type="submit">Kirish</button></form>
-<form id="fr" class="af" hidden><label class="f">Ism<input type="text" id="ri" required autocomplete="given-name"></label><label class="f">Familiya<input type="text" id="rf" required autocomplete="family-name"></label><label class="f">Telefon raqam<input type="tel" id="rp" required placeholder="+998 90 123 45 67" autocomplete="tel"></label><label class="f">Tugʻilgan sana<input type="date" id="rb" required></label><label class="f">Parol (kamida 6 belgi)<input type="password" id="rw" required minlength="6" autocomplete="new-password"></label><button class="btn" type="submit">Roʻyxatdan oʻtish</button></form>
+<form id="fr" class="af" hidden><label class="f">Ism<input type="text" id="ri" required autocomplete="given-name"></label><label class="f">Familiya<input type="text" id="rf" required autocomplete="family-name"></label><label class="f">Telefon raqam<input type="tel" id="rp" required placeholder="+998 90 123 45 67" autocomplete="tel"></label><label class="f">Tugʻilgan kun va oy<span style="display:flex;gap:8px"><select id="rd" required></select><select id="rm" required></select></span></label><label class="f">Parol (kamida 6 belgi)<input type="password" id="rw" required minlength="6" autocomplete="new-password"></label><button class="btn" type="submit">Roʻyxatdan oʻtish</button></form>
 <div class="ok" id="ae" role="alert" style="margin-top:14px"></div>
 </dialog>
+<dialog id="ald"><div class="t2"><button type="button" class="on" style="cursor:default">Admin</button><button type="button" id="acl" aria-label="Yopish" style="flex:none;width:46px;padding:0">✕</button></div><form id="afm" class="af"><label class="f">Admin parol<input type="password" id="apw" required autocomplete="current-password"></label><button class="btn" type="submit">Kirish</button></form><div class="ok" id="aer" role="alert" style="margin-top:14px"></div></dialog>
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import {getFirestore,doc,getDoc,setDoc,addDoc,collection,query,where,getDocs,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,updatePassword} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,addDoc,collection,query,where,getDocs,serverTimestamp,updateDoc,writeBatch,increment} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 const app=initializeApp({apiKey:"AIzaSyAoQ0XF9DjTuzIgo0VEXDK4-8iLV4SRKoU",authDomain:"anush-luxury.firebaseapp.com",projectId:"anush-luxury",storageBucket:"anush-luxury.firebasestorage.app",messagingSenderId:"871534378110",appId:"1:871534378110:web:aa45b7eafb685eecccec2f"});
 const auth=getAuth(app),db=getFirestore(app);
-const cfg={loyaltyAt:50,loyaltyPct:10,bdayPct:10,bdayDays:3};
 const ADMIN='admin@anush-luxury.uz';
 function toEmail(r){r=String(r).trim();if(r.includes('@'))return r;let d=r.replace(/\D/g,'');if(d.length==9)d='998'+d;if(!/^998\d{9}$/.test(d))throw new Error('Telefon raqam notoʻgʻri');return d+'@anush-luxury.uz'}
 function phoneOf(r){return '+'+toEmail(r).split('@')[0]}
-function bdayNear(bd,date){if(!bd)return false;const p=bd.split('-').map(Number),t=new Date(date);for(let y=t.getFullYear()-1;y<=t.getFullYear()+1;y++){const b=new Date(y,p[1]-1,p[2]);if(Math.abs(Math.round((t-b)/864e5))<=cfg.bdayDays)return true}return false}
-function disc(me,date){let r={pct:0,reason:''};if(!me||me.admin)return r;if((me.visits||0)>=cfg.loyaltyAt)r={pct:cfg.loyaltyPct,reason:cfg.loyaltyAt+' tashrif chegirmasi'};if(bdayNear(me.tugilgan,date||new Date())&&cfg.bdayPct>r.pct)r={pct:cfg.bdayPct,reason:'Tugʻilgan kun chegirmasi'};return r}
-function age(bd){const p=bd.split('-').map(Number),t=new Date();let a=t.getFullYear()-p[0];if(t<new Date(t.getFullYear(),p[1]-1,p[2]))a--;return a}
+const cfg={loyaltyAt:50,loyaltyPct:5,wheelDays:7};
+function bdm(bd){const s=String(bd||'');return s.length>=10?s.slice(5):s}
+function ymd(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function isBday(bd,dt){dt=dt||new Date();return bdm(bd)===ymd(dt).slice(5)}
+function disc(me,date){let r={pct:0,reason:''};if(!me||me.admin)return r;if((me.visits||0)>=cfg.loyaltyAt)r={pct:cfg.loyaltyPct,reason:cfg.loyaltyAt+' tashrif chegirmasi'};const w=me.wheel;if(w){const n=Math.round((new Date(date||ymd(new Date()))-new Date(w.date))/864e5);if(n>=0&&n<=cfg.wheelDays&&w.pct>r.pct)r={pct:w.pct,reason:'Tugʻilgan kun barabani'}}return r}
 const $=i=>document.getElementById(i);
 let me=null,regBusy=false;
 function say(el,s,bad){el.style.display='block';el.textContent=s;el.style.color=bad?'#e0566b':''}
@@ -338,18 +358,17 @@ function tab(r){$('fl').hidden=!!r;$('fr').hidden=!r;$('t1').classList.toggle('o
 function openAuth(r){tab(r||0);$('ad').showModal()}
 $('t1').onclick=()=>tab(0);$('t2').onclick=()=>tab(1);$('cl').onclick=()=>$('ad').close();
 $('op').onclick=()=>openAuth(0);
-$('acc').onclick=()=>{if(me)$('kartam').scrollIntoView({behavior:'smooth'});else openAuth(0)};
+$('acc').onclick=()=>{if(me)(me.admin?$('adm'):$('kartam')).scrollIntoView({behavior:'smooth'});else openAuth(0)};
 $('lo').onclick=()=>signOut(auth);
 $('fl').onsubmit=async e=>{e.preventDefault();try{await signInWithEmailAndPassword(auth,toEmail($('lp').value),$('lw').value);$('ad').close();$('fl').reset()}catch(x){say($('ae'),em(x),1)}};
-$('fr').onsubmit=async e=>{e.preventDefault();const g=i=>$(i).value.trim();regBusy=true;try{const ph=phoneOf(g('rp'));if(!g('ri')||!g('rf')||!g('rb'))throw new Error('Barcha maydonlarni toʻldiring.');const c=await createUserWithEmailAndPassword(auth,toEmail(ph),$('rw').value);await setDoc(doc(db,'users',c.user.uid),{ism:g('ri'),familiya:g('rf'),telefon:ph,tugilgan:g('rb'),visits:0,createdAt:serverTimestamp()});regBusy=false;await load(c.user);$('ad').close();$('fr').reset()}catch(x){regBusy=false;say($('ae'),em(x),1)}};
+$('fr').onsubmit=async e=>{e.preventDefault();const g=i=>$(i).value.trim();regBusy=true;try{const ph=phoneOf(g('rp'));if(!g('ri')||!g('rf')||!rbv())throw new Error('Barcha maydonlarni toʻldiring.');const c=await createUserWithEmailAndPassword(auth,toEmail(ph),$('rw').value);await setDoc(doc(db,'users',c.user.uid),{ism:g('ri'),familiya:g('rf'),telefon:ph,tugilgan:rbv(),visits:0,createdAt:serverTimestamp()});regBusy=false;await load(c.user);$('ad').close();$('fr').reset()}catch(x){regBusy=false;say($('ae'),em(x),1)}};
 async function load(u){if(!u)me=null;else if(u.email===ADMIN)me={admin:1,ism:'Admin',uid:u.uid};else{const s=await getDoc(doc(db,'users',u.uid));me=s.exists()?{...s.data(),uid:u.uid}:null}render()}
 onAuthStateChanged(auth,u=>{if(!regBusy)load(u).catch(()=>{})});
 function dsc(){const el=$('dsc');if(!me||me.admin){el.textContent='';return}const d=disc(me,$('d').value||undefined);let t=0;for(const k in window.sel)t+=window.sel[k][1];el.textContent=d.pct&&t?'🎁 '+d.reason+' -'+d.pct+'%: '+fmt(Math.round(t*(100-d.pct))/100):''}
-function render(){const u=!!me&&!me.admin;$('guest').hidden=u;$('user').hidden=!u;$('kartam').hidden=!me;$('acc').textContent=me?'👤 '+me.ism:'Kirish';
-if(me){$('kn').textContent=me.admin?'Admin hisobi':me.ism+' '+me.familiya;$('kd').textContent=me.admin?'Admin panel keyingi bosqichda qoʻshiladi.':me.telefon+' · '+age(me.tugilgan)+' yosh';
-if(u){const v=me.visits||0,d=disc(me);$('kv').textContent=v;$('kp').textContent=cfg.loyaltyAt+' ta tashrifdan keyin '+cfg.loyaltyPct+'% chegirma';$('kb').style.width=Math.min(100,v/cfg.loyaltyAt*100)+'%';$('kc').textContent=d.pct?'Hozir '+d.reason+': '+d.pct+'%':'Tugʻilgan kuningizdan '+cfg.bdayDays+' kun oldin va keyin '+cfg.bdayPct+'% chegirma beriladi.';$('who').textContent=me.ism+' '+me.familiya+' · '+me.telefon;bookings()}else $('bl').textContent=''}
-dsc()}
-async function bookings(){const box=$('bl');box.textContent='Yuklanmoqda...';try{const s=await getDocs(query(collection(db,'bookings'),where('uid','==',me.uid)));const a=s.docs.map(x=>x.data()).sort((x,y)=>(y.sana+y.vaqt).localeCompare(x.sana+x.vaqt));box.textContent=a.length?'':'Hali yozilish yoʻq.';a.forEach(b=>{const r=document.createElement('div');r.className='bi';const l=document.createElement('div');l.textContent=b.sana+' · '+b.vaqt;const sm=document.createElement('small');sm.textContent=b.xizmatlar.map(x=>x.n).join(', ');l.appendChild(sm);const q=document.createElement('div');q.textContent=fmt(b.tolov)+' · '+({yangi:'Kutilmoqda',tugatildi:'Tugallandi ✅',bekor:'Bekor qilindi'}[b.status]||b.status);r.append(l,q);box.appendChild(r)})}catch(x){box.textContent='Yozilishlarni yuklab boʻlmadi.'}}
+function render(){const u=!!me&&!me.admin,a=!!me&&!!me.admin;$('guest').hidden=u;$('user').hidden=!u;$('kartam').hidden=!u;$('adm').hidden=!a;$('al').hidden=!a;$('ai').hidden=a;$('acc').textContent=me?'👤 '+me.ism:'Kirish';
+if(u){const v=me.visits||0,d=disc(me);$('kn').textContent=me.ism+' '+me.familiya;$('kd').textContent=me.telefon+' · '+bdm(me.tugilgan).split('-').reverse().join('.');$('kv').textContent=v;$('kp').textContent=cfg.loyaltyAt+' ta tashrifdan keyin '+cfg.loyaltyPct+'% chegirma';$('kb').style.width=Math.min(100,v/cfg.loyaltyAt*100)+'%';$('kc').textContent=d.pct?'Hozir '+d.reason+': '+d.pct+'%':'Tugʻilgan kuningizda barabanni aylantirib, 10% gacha chegirma yutasiz.';$('who').textContent=me.ism+' '+me.familiya+' · '+me.telefon;wheelUI();bookings()}
+if(a)loadAdmin();dsc()}
+async function bookings(){const box=$('bl');box.textContent='Yuklanmoqda...';try{const s=await getDocs(query(collection(db,'bookings'),where('uid','==',me.uid)));const a=s.docs.map(x=>x.data()).sort((x,y)=>(y.sana+y.vaqt).localeCompare(x.sana+x.vaqt));box.textContent=a.length?'':'Hali yozilish yoʻq.';a.forEach(b=>{const r=document.createElement('div');r.className='bi';const l=document.createElement('div');l.textContent=b.sana+' · '+b.vaqt;const sm=document.createElement('small');sm.textContent=b.xizmatlar.map(x=>x.n).join(', ');l.appendChild(sm);const q=document.createElement('div');q.textContent=fmt(b.tolov)+' · '+({yangi:'Kutilmoqda',tugatildi:'Qabul qilindi ✅',bekor:'Qabul qilinmadi ❌'}[b.status]||b.status);r.append(l,q);box.appendChild(r)})}catch(x){box.textContent='Yozilishlarni yuklab boʻlmadi.'}}
 $('f').onsubmit=async e=>{e.preventDefault();const ok=$('ok');if(!me||me.admin){openAuth(0);return}
 const ks=Object.keys(window.sel);if(!ks.length){say(ok,'Avval narxlar boʻlimida xizmat belgilang.',1);return}
 const date=$('d').value,time=$('tm').value;if(!date||!time){say(ok,'Sana va vaqtni tanlang.',1);return}
@@ -362,6 +381,29 @@ $('rows').addEventListener('change',dsc);$('d').addEventListener('change',dsc);
 const tm=$('tm');for(let h=9;h<20;h++)for(const m of['00','30']){const o=document.createElement('option');o.value=o.textContent=String(h).padStart(2,'0')+':'+m;tm.appendChild(o)}
 const t0=new Date();$('d').min=t0.getFullYear()+'-'+String(t0.getMonth()+1).padStart(2,'0')+'-'+String(t0.getDate()).padStart(2,'0');
 getDoc(doc(db,'config','site')).then(s=>{if(s.exists())Object.assign(cfg,s.data());render()}).catch(()=>{});
+
+const rd=$('rd'),rm=$('rm');rd.innerHTML='<option value="">Kun</option>';for(let i=1;i<=31;i++)rd.innerHTML+='<option>'+i+'</option>';
+rm.innerHTML='<option value="">Oy</option>'+['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentabr','Oktabr','Noyabr','Dekabr'].map((n,i)=>'<option value="'+(i+1)+'">'+n+'</option>').join('');
+const rbv=()=>$('rm').value&&$('rd').value?$('rm').value.padStart(2,'0')+'-'+$('rd').value.padStart(2,'0'):'';
+const WP=[1,3,5,7,10],WW=[35,30,20,10,5];
+WP.forEach((p,i)=>{const b=document.createElement('b'),c=i*72+36;b.textContent=p+'%';b.style.transform='rotate('+c+'deg) translateY(-88px) rotate('+(-c)+'deg)';$('wl').appendChild(b)});
+function wheelUI(){const y=new Date().getFullYear(),done=me.wheel&&me.wheel.year===y,bd=isBday(me.tugilgan);$('wh').hidden=!bd&&!done;$('spn').disabled=!!done||!bd;$('wr').textContent=done?'Sizning chegirmangiz: '+me.wheel.pct+'% ('+cfg.wheelDays+' kun amal qiladi)':''}
+$('spn').onclick=async()=>{if(!me||$('spn').disabled)return;$('spn').disabled=true;const r=crypto.getRandomValues(new Uint32Array(1))[0]/4294967296*100;let a=0,i=0;for(;i<4;i++){a+=WW[i];if(r<a)break}const pct=WP[i];
+$('wl').style.transform='rotate('+(360*6-(i*72+36+(Math.random()*40-20)))+'deg)';await new Promise(s=>setTimeout(s,4700));
+try{const w={year:new Date().getFullYear(),pct,date:ymd(new Date())};await updateDoc(doc(db,'users',me.uid),{wheel:w});me.wheel=w;render()}catch(x){$('wr').textContent='Saqlab boʻlmadi, qayta urinib koʻring.';$('spn').disabled=false}};
+$('aa').onclick=e=>{e.preventDefault();document.body.classList.remove('open');$('ald').showModal()};$('acl').onclick=()=>$('ald').close();
+$('afm').onsubmit=async e=>{e.preventDefault();try{await signInWithEmailAndPassword(auth,ADMIN,$('apw').value);$('ald').close();$('afm').reset();location.hash='adm'}catch(x){say($('aer'),'Parol xato.',1)}};
+$('alo').onclick=()=>signOut(auth);
+$('apf').onsubmit=async e=>{e.preventDefault();const o=$('apo');try{await updatePassword(auth.currentUser,$('np').value);say(o,'Parol almashtirildi.');$('apf').reset()}catch(x){say(o,(x.code||'').includes('requires-recent')?'Chiqib, qayta kiring va yana urining.':em(x),1)}};
+function fill(box,a,act){box.textContent=a.length?'':'Hozircha yoʻq.';a.forEach(b=>{const r=document.createElement('div');r.className='bi';const l=document.createElement('div'),n=document.createElement('b');n.textContent=(b.ism||'Mijoz')+(b.familiya?' '+b.familiya:'');l.append(n,' · '+(b.telefon||'telefon yoʻq'));const sm=document.createElement('small');sm.textContent=b.sana+' '+b.vaqt+' · '+b.xizmatlar.map(x=>x.n).join(', ')+(b.tolov?' · '+fmt(b.tolov):'')+(b.chegirma?' (-'+b.chegirma+'%)':'');l.appendChild(sm);r.appendChild(l);const q=document.createElement('div');
+if(act){q.className='ab';[['✅','tugatildi'],['❌','bekor']].forEach(([s,k])=>{const bt=document.createElement('button');bt.textContent=s;bt.setAttribute('aria-label',k=='bekor'?'Qabul qilinmadi':'Qabul qilindi');bt.onclick=()=>setSt(b,k);q.appendChild(bt)})}else q.textContent=b.status==='tugatildi'?'Qabul qilindi ✅':'Qabul qilinmadi ❌';r.appendChild(q);box.appendChild(r)})}
+async function loadAdmin(){try{const s=await getDocs(collection(db,'bookings')),all=s.docs.map(d=>({id:d.id,...d.data()})),k=b=>b.sana+b.vaqt;
+const q=all.filter(b=>b.status==='yangi').sort((x,y)=>k(x).localeCompare(k(y))),h=all.filter(b=>b.status!=='yangi').sort((x,y)=>k(y).localeCompare(k(x))).slice(0,20);
+$('aq').textContent=q.length;fill($('aqu'),q,true);fill($('ahs'),h,false);const st=await getDoc(doc(db,'stats','main'));$('as').textContent=st.exists()?(st.data().done||0):0}catch(x){$('aqu').textContent='Yuklab boʻlmadi: '+em(x)}}
+async function setSt(b,s){if(!confirm(s==='tugatildi'?'Mijoz qabul qilindimi?':'Mijoz qabul qilinmadimi?'))return;try{const w=writeBatch(db);w.update(doc(db,'bookings',b.id),{status:s});
+if(s==='tugatildi'){w.set(doc(db,'stats','main'),{done:increment(b.xizmatSoni||b.xizmatlar.length||1)},{merge:true});if(b.uid&&b.uid!=='walkin')w.update(doc(db,'users',b.uid),{visits:increment(1)})}await w.commit();loadAdmin()}catch(x){alert('Xatolik: '+em(x))}}
+$('aw').onsubmit=async e=>{e.preventDefault();const n=Math.max(1,parseInt($('wc').value)||1),s=Number($('ws').value)||0,t=new Date();
+try{await addDoc(collection(db,'bookings'),{uid:'walkin',ism:$('wn').value.trim()||'Mijoz',familiya:'',telefon:'',sana:ymd(t),vaqt:String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0'),xizmatlar:[{n:$('wx').value.trim(),p:s/1000}],xizmatSoni:n,jami:s/1000,chegirma:0,chegirmaSabab:'',tolov:s/1000,status:'yangi',qoshgan:'admin',createdAt:serverTimestamp()});$('aw').reset();loadAdmin()}catch(x){alert('Xatolik: '+em(x))}};
 </script>
 </body>
 </html>
